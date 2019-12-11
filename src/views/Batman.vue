@@ -1,5 +1,5 @@
 <template>
-  <div class="batman">
+  <div class="batman" v-if="summary !== null">
     <h1>SUMMARY</h1>
     <div>
       <img :src="summary.data.image.original" />
