@@ -15,7 +15,7 @@ export default {
   name: "home",
   data() {
     return {
-      source: "http://api.tvmaze.com/search/shows?q=batman",
+      source: "https://api.tvmaze.com/search/shows?q=batman",
       info: null
     };
   },

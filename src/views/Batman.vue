@@ -31,7 +31,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://api.tvmaze.com/shows/" + this.id)
+      .get("https://api.tvmaze.com/shows/" + this.id)
       .then(response => (this.summary = response));
   }
 };
