@@ -1,6 +1,6 @@
 <template>
-  <div class="home" v-if="info !== null">
-    <div v-for="each in info.data" :key="each.id">
+  <div class="home" v-if="batmanShows !== null">
+    <div v-for="each in batmanShows.data" :key="each.id">
       <router-link :to="{ name: 'batman', params: { id: each.show.id } }">
         <img :src="each.show.image.medium" />
       </router-link>
@@ -9,18 +9,21 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapState, mapActions } from "vuex";
 // @ is an alias to /src
 export default {
   name: "home",
   data() {
     return {
-      source: "https://api.tvmaze.com/search/shows?q=batman",
-      info: null
+      source: "https://api.tvmaze.com/search/shows?q=batman"
     };
   },
-  mounted() {
-    axios.get(this.source).then(response => (this.info = response));
+  computed: mapState(["batmanShows"]),
+  methods: {
+    ...mapActions(["getBatmanShows"])
   },
+  mounted() {
+    this.$store.dispatch("getBatmanShows", { source: this.source });
+  }
 };
 </script>

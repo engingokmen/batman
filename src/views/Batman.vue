@@ -19,20 +19,26 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "batman",
   props: ["id"],
   data() {
     return {
-      summary: null
+      source: "https://api.tvmaze.com/shows/"
     };
   },
+  computed: mapState(["summary"]),
+  methods: {
+    ...mapActions(["getShowSummary"])
+  },
   mounted() {
-    axios
-      .get("https://api.tvmaze.com/shows/" + this.id)
-      .then(response => (this.summary = response));
+    this.$store.dispatch("getShowSummary", {source: this.source+this.id})
   }
 };
 </script>
+
+<style lang="scss">
+$color: red;
+</style>
