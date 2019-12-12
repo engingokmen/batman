@@ -1,19 +1,17 @@
 <template>
   <div class="batman" v-if="summary !== null">
-    <h1>SUMMARY</h1>
-    <div>
-      <img :src="summary.data.image.original" />
-      <p>
-        Genres
-      </p>
-      <ul v-for="genre in summary.data.genres" :key="genre.id">
-        <li>
+    <h1>SUMMARY OF </h1>
+    <img :src="summary.data.image.original" />
+    <div class="summary-container">
+      <ul>
+        <strong>Genres:</strong>
+        <li v-for="genre in summary.data.genres" :key="genre.id">
           {{ genre }}
         </li>
       </ul>
-      <p>Premiered: {{ summary.data.premiered }}</p>
-      <p>Rating: Average {{ summary.data.rating.average }}</p>
-      <p v-html="summary.data.summary"></p>
+      <p><strong>Premiered:</strong> {{ summary.data.premiered }}</p>
+      <p><strong>Rating:</strong> {{ summary.data.rating.average }} Average</p>
+      <strong>Summary:</strong><p class="summary" v-html="summary.data.summary"></p>
     </div>
   </div>
 </template>
@@ -39,6 +37,33 @@ export default {
 };
 </script>
 
-<style lang="scss">
-$color: red;
+<style lang="scss" scoped>
+  .batman {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .summary-container {
+    width:66%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  ul {
+    margin-top: 2rem;
+    padding:0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  li {
+    margin: 0;
+    padding:0 0.3rem;
+  }
+  .summary {
+    text-align: left;
+  }
 </style>

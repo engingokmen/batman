@@ -4,6 +4,7 @@
       <router-link :to="{ name: 'batman', params: { id: each.show.id } }">
         <img :src="each.show.image.medium" />
       </router-link>
+      <span>{{each.show.name}}</span>
     </div>
   </div>
 </template>
@@ -27,3 +28,25 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  #nav {
+    padding: 0;
+  }
+  .home{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  div {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  div img {
+    box-shadow: 6px 6px  3px grey;
+  }
+</style>
