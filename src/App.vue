@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">LIST OF BATMAN TV-SHOWS</router-link>
+      <router-link to="/">LIST OF TV-SHOWS</router-link>
     </div>
     <router-view />
   </div>

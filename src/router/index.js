@@ -17,8 +17,8 @@ const router = new VueRouter({
     },
     // dynamic segments start with a colon
     {
-      path: "/batman/:id",
-      name: "batman",
+      path: "/summary/:id",
+      name: "summary",
       component: Batman,
       props: true
     }
