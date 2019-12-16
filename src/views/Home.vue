@@ -1,46 +1,41 @@
 <template>
-  <div class="home" v-if="batmanShows !== null">
-    <input
-      class="input-box"
-      v-model="inputSearch"
-      placeholder="SEARCH FOR TV SHOWS"
-    />
-    <button v-on:click="getShows">Search</button>
+  <div class="home" v-if="shows !== null">
+    <InputSearch></InputSearch>
     <div class="container">
-      <div
-        class="show-container"
-        v-for="each in batmanShows.data"
-        :key="each.id"
-      >
-        <router-link :to="{ name: 'summary', params: { id: each.show.id } }">
+      <div class="show-container" v-for="each in shows.data" :key="each.id">
+        <router-link :to="{ name: 'showSummary', params: { id: each.show.id } }">
           <img :src="each.show.image.medium" />
         </router-link>
         <span>{{ each.show.name }}</span>
       </div>
     </div>
   </div>
+  <div v-else>
+    DATA LOADING ...
+  </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import InputSearch from "../components/InputSearch";
 // @ is an alias to /src
 export default {
   name: "home",
+  components: {
+    InputSearch
+  },
   data() {
     return {
-      inputSearch: "batman",
+      initialSearchQuery: "batman",
       source: "https://api.tvmaze.com/search/shows?q="
     };
   },
-  computed: mapState(["batmanShows"]),
+  computed: mapState(["shows"]),
   methods: {
-    ...mapActions(["getBatmanShows"]),
-    getShows() {
-      this.getBatmanShows({ source: this.source + this.inputSearch });
-    }
+    ...mapActions(["getShows"])
   },
   mounted() {
-    this.getBatmanShows({ source: this.source + this.inputSearch });
+    this.getShows({ source: this.source + this.initialSearchQuery });
   }
 };
 </script>

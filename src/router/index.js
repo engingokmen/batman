@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
-import Batman from "../views/Batman.vue";
+import Shows from "../views/Shows.vue";
 
 Vue.use(VueRouter);
 
@@ -18,8 +18,8 @@ const router = new VueRouter({
     // dynamic segments start with a colon
     {
       path: "/summary/:id",
-      name: "summary",
-      component: Batman,
+      name: "showSummary",
+      component: Shows,
       props: true
     }
   ]

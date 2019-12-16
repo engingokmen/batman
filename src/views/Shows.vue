@@ -15,13 +15,16 @@
       <p class="summary-text-container" v-html="summary.data.summary"></p>
     </div>
   </div>
+  <div v-else>
+    DATA LOADING ...
+  </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "summary",
+  name: "showSummary",
   props: ["id"],
   data() {
     return {
@@ -30,10 +33,10 @@ export default {
   },
   computed: mapState(["summary"]),
   methods: {
-    ...mapActions(["getShowSummary"])
+    ...mapActions(["getSummary"])
   },
   mounted() {
-    this.getShowSummary({ source: this.source + this.id });
+    this.getSummary({ source: this.source + this.id });
   }
 };
 </script>
