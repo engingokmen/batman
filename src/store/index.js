@@ -7,17 +7,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     inputSearch: "batman",
-    shows: null,
+    shows: [],
     summary: null
   },
-  getters: {},
+  getters: {
+    getTwo: state => (i, j) => {
+      return state.shows.slice(i, j);
+    }
+  },
   mutations: {
     fillShows(state, { response }) {
-      if (response === null) {
-        return;
-      } else {
-        state.shows = response;
-      }
+      state.shows = response.data;
     },
     fillSummary(state, { response }) {
       state.summary = response;
@@ -25,7 +25,9 @@ export default new Vuex.Store({
   },
   actions: {
     getShows({ commit }, { source }) {
-      axios.get(source).then(response => commit("fillShows", { response }));
+      axios.get(source).then(response => {
+        commit("fillShows", { response });
+      });
     },
     getSummary({ commit }, { source }) {
       axios.get(source).then(response => commit("fillSummary", { response }));

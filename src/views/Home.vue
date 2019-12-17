@@ -1,22 +1,41 @@
 <template>
-  <div class="home" v-if="shows !== null">
+  <div class="home">
     <InputSearch></InputSearch>
-    <div class="container">
-      <div class="show-container" v-for="each in shows.data" :key="each.id">
-        <router-link :to="{ name: 'showSummary', params: { id: each.show.id } }">
-          <img :src="each.show.image.medium" />
+    <div class="container" v-if="getTwo(startItem, endItem) !== null">
+      <div
+        class="show-container"
+        v-for="each in getTwo(startItem, endItem)"
+        :key="each.show.id"
+      >
+        <router-link
+          :to="{ name: 'showSummary', params: { id: each.show.id } }"
+        >
+          <p class="img-box" v-if="each.show.image === null">
+            NO IMAGE
+          </p>
+          <img class="img-box" v-else :src="each.show.image.medium" />
         </router-link>
         <span>{{ each.show.name }}</span>
       </div>
     </div>
-  </div>
-  <div v-else>
-    DATA LOADING ...
+    <div v-else>
+      DATA LOADING ...
+    </div>
+    <p><strong>Page: </strong>{{ pageNum }} of {{ numberOfPages }}</p>
+    <button
+      v-show="getTwo(startItem, endItem).length > 0"
+      v-on:click="nextPage"
+    >
+      <span>Next Page</span>
+    </button>
+    <button v-show="startItem > 0" v-on:click="previousPage">
+      <span>Previous Page</span>
+    </button>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import InputSearch from "../components/InputSearch";
 // @ is an alias to /src
 export default {
@@ -27,12 +46,33 @@ export default {
   data() {
     return {
       initialSearchQuery: "batman",
-      source: "https://api.tvmaze.com/search/shows?q="
+      source: "https://api.tvmaze.com/search/shows?q=",
+      pageNum: 0,
+      startItem: 0,
+      endItem: 2
     };
   },
-  computed: mapState(["shows"]),
+  computed: {
+    ...mapGetters(["getTwo"]),
+    ...mapState(["shows"]),
+    numberOfPages() {
+      return Math.ceil(this.shows.length / (this.endItem - this.startItem));
+    }
+  },
   methods: {
-    ...mapActions(["getShows"])
+    ...mapActions(["getShows"]),
+    nextPage() {
+      this.pageNum++;
+      this.startItem = this.pageNum * 2;
+      this.endItem = this.pageNum * 2 + 2;
+    },
+    previousPage() {
+      if (this.pageNum > 0) {
+        this.pageNum--;
+        this.startItem = this.pageNum * 2;
+        this.endItem = this.pageNum * 2 + 2;
+      }
+    }
   },
   mounted() {
     this.getShows({ source: this.source + this.initialSearchQuery });
@@ -64,9 +104,37 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.show-container img {
+
+img.img-box,
+p.img-box {
   box-shadow: 6px 6px 3px grey;
 }
+
+p.img-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-color: lightgrey;
+  width: 204px;
+  height: 284px;
+}
+
+a {
+  color: darkgrey;
+  text-decoration: none;
+}
+
+a:default {
+  color: darkgrey;
+  text-decoration: none;
+}
+a:link {
+  color: darkgrey;
+  color: none;
+}
+
 .input-box {
   margin: 1rem;
   border-radius: 1rem;

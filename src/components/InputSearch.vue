@@ -20,11 +20,11 @@ export default {
   computed: {
     searchIndicator: function() {
       if (this.isCalculating) {
-        return "⟳ Fetching new results";
+        return "⟳";
       } else if (this.searchQueryIsDirty) {
-        return "... Typing";
+        return "...";
       } else {
-        return "✓ Done";
+        return "✓";
       }
     }
   },
