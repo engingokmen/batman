@@ -49,9 +49,9 @@ export default {
     onDragEnd(event) {
       event.preventDefault();
       if (this.deltaX > 150) {
-        this.$emit('next-page')
-      } else if (this.deltaX < -150) {
         this.$emit('previous-page')
+      } else if (this.deltaX < -150) {
+        this.$emit('next-page')
       }
 
       this.deltaX = 0;

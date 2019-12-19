@@ -44,13 +44,16 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.container {
+/* .container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-}
+} */
+/* .container {
+  padding: -50px;
+} */
 .show-container {
   padding: 1rem;
   display: flex;
