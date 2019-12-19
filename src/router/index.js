@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
-import Shows from "../views/Shows.vue";
+import Summary from "../views/Summary.vue";
 
 Vue.use(VueRouter);
 
@@ -19,7 +19,7 @@ const router = new VueRouter({
     {
       path: "/summary/:id",
       name: "showSummary",
-      component: Shows,
+      component: Summary,
       props: true
     }
   ]
