@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="debounce-search-demo">
-    <input v-model="searchQuery" placeholder="Type something" />
+    <input v-model="searchQuery" placeholder="Search for TV Shows" />
     <strong>{{ searchIndicator }}</strong>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
       } else if (this.searchQueryIsDirty) {
         return "...";
       } else {
-        return "✓";
+        return "";
       }
     }
   },

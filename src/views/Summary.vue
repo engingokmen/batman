@@ -1,7 +1,7 @@
 <template>
   <div class="summary" v-if="summary !== null">
     <h1>SUMMARY OF</h1>
-    <img :src="summary.data.image.original" />
+    <img class="summary-image" :src="summary.data.image.original" />
     <div class="summary-container">
       <ul>
         <strong>Genres:</strong>
@@ -54,6 +54,9 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+}
+.summary-image {
+  height:500px;
 }
 ul {
   margin-top: 2rem;

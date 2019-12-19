@@ -8,15 +8,15 @@
       v-on:previous-page="previousPage"
     ></DraggableElement>
     <p><strong>Page: </strong>{{ pageNum }} of {{ numberOfPages }}</p>
-    <button
-      v-show="getTwo(startItem, endItem).length > 0"
-      v-on:click="nextPage"
-    >
-      <span>Next Page</span>
-    </button>
-    <button v-show="startItem > 0" v-on:click="previousPage">
-      <span>Previous Page</span>
-    </button>
+    <div class="buttons">
+      <button class="text-buttons" v-on:click="previousPage">
+        <span>Previous Page</span>
+      </button>
+      <button class="number-buttons" v-for="num of numberOfPages" v-bind:key="num.id" v-on:click="gotoPage(num)">{{num}}</button>
+      <button class="text-buttons" v-on:click="nextPage">
+        <span>Next Page</span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      pageNum: 0,
+      pageNum: 1,
       startItem: 0,
       endItem: 2
     };
@@ -48,21 +48,25 @@ export default {
   methods: {
     ...mapActions(["getShows"]),
     nextPage() {
-      this.pageNum++;
-      this.startItem = this.pageNum * 2;
-      this.endItem = this.pageNum * 2 + 2;
+      if (this.pageNum < this.numberOfPages) {
+        this.pageNum++;
+        this.startItem = this.pageNum * 2 - 2;
+        this.endItem = this.pageNum * 2;
+      }
     },
     previousPage() {
-      if (this.pageNum > 0) {
+      if (this.pageNum > 1) {
         this.pageNum--;
-        this.startItem = this.pageNum * 2;
-        this.endItem = this.pageNum * 2 + 2;
+        this.startItem = this.pageNum * 2 - 2;
+        this.endItem = this.pageNum * 2;
       }
+    },
+    gotoPage(num) {
+      this.pageNum = num;
+      this.startItem = this.pageNum * 2 - 2;
+      this.endItem = this.pageNum * 2;
     }
-  },
-  // mounted() {
-  //   this.getShows({ source: this.source + this.initialSearchQuery });
-  // }
+  }
 };
 </script>
 
@@ -76,56 +80,28 @@ export default {
   justify-content: center;
   align-items: center;
 }
-// .container {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: flex-start;
-//   flex-wrap: wrap;
-// }
-// .show-container {
-//   padding: 1rem;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// }
-//
-// img.img-box,
-// p.img-box {
-//   box-shadow: 6px 6px 3px grey;
-// }
-//
-// p.img-box {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 0;
-//   background-color: lightgrey;
-//   width: 204px;
-//   height: 284px;
-// }
-//
-// a {
-//   color: darkgrey;
-//   text-decoration: none;
-// }
-//
-// a:default {
-//   color: darkgrey;
-//   text-decoration: none;
-// }
-// a:link {
-//   color: darkgrey;
-//   color: none;
-// }
-
 .input-box {
   margin: 1rem;
   border-radius: 1rem;
   width: 200px;
   text-align: center;
   box-shadow: 1px 1px 10px #3498db;
+}
+.buttons button{
+  border-radius: 4px;
+  text-align: center;
+  margin:1px;
+  height:50px;
+}
+
+.buttons button:hover{
+  background-color: #42b983;
+}
+.buttons .number-buttons {
+  width:40px;
+}
+
+.buttons .text-buttons {
+  width:100px;
 }
 </style>
