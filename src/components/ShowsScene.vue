@@ -12,7 +12,14 @@
       <button class="text-buttons" v-on:click="previousPage">
         <span>Previous Page</span>
       </button>
-      <button class="number-buttons" v-for="num of numberOfPages" v-bind:key="num.id" v-on:click="gotoPage(num)">{{num}}</button>
+      <button
+        class="number-buttons"
+        v-for="num of numberOfPages"
+        v-bind:key="num.id"
+        v-on:click="gotoPage(num)"
+      >
+        {{ num }}
+      </button>
       <button class="text-buttons" v-on:click="nextPage">
         <span>Next Page</span>
       </button>
@@ -96,22 +103,22 @@ export default {
   box-shadow: 1px 1px 10px #3498db;
 }
 
-.buttons button{
+.buttons button {
   border-radius: 4px;
   text-align: center;
-  margin:1px;
-  height:50px;
+  margin: 1px;
+  height: 50px;
 }
 
-.buttons button:hover{
+.buttons button:hover {
   background-color: #42b983;
 }
 .buttons .number-buttons {
-  width:40px;
+  width: 40px;
 }
 
 .buttons .text-buttons {
-  width:100px;
+  width: 100px;
 }
 
 @media screen and (max-width: 600px) {
@@ -119,5 +126,4 @@ export default {
     display: none;
   }
 }
-
 </style>

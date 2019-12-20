@@ -56,7 +56,7 @@ export default {
   align-items: flex-start;
 }
 .summary-image {
-  height:500px;
+  height: 500px;
 }
 ul {
   margin-top: 2rem;
