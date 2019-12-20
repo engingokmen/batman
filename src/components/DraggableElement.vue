@@ -36,8 +36,6 @@ export default {
       this.dragStarted = true;
     },
     onDragMove(event) {
-      event.preventDefault();
-
       if (!this.dragStarted) {
         return;
       }
@@ -47,7 +45,7 @@ export default {
       event.currentTarget.style.transform = "translate(" + this.deltaX + "px) ";
     },
     onDragEnd(event) {
-      event.preventDefault();
+      // event.preventDefault();
       if (this.deltaX > 115) {
         this.$emit("previous-page");
       } else if (this.deltaX < -115) {

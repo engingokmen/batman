@@ -80,6 +80,14 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+// @media screen and (max-width: 600px) {
+//   .shows {
+//     overflow-y: scroll; /* has to be scroll, not auto */
+//     -webkit-overflow-scrolling: touch;
+//   }
+// }
+
 .input-box {
   margin: 1rem;
   border-radius: 1rem;
@@ -87,6 +95,7 @@ export default {
   text-align: center;
   box-shadow: 1px 1px 10px #3498db;
 }
+
 .buttons button{
   border-radius: 4px;
   text-align: center;
@@ -104,4 +113,11 @@ export default {
 .buttons .text-buttons {
   width:100px;
 }
+
+@media screen and (max-width: 600px) {
+  .buttons {
+    display: none;
+  }
+}
+
 </style>
