@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     onDragStart(event) {
-      event.preventDefault();
+      // event.preventDefault();
       event.currentTarget.style.transition = "0s"; //reset transition value
 
       this.originX = event.touches[0].clientX;
